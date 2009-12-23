@@ -19,6 +19,7 @@ BuildRequires: python-devel
 BuildRequires: libpng-devel
 BuildRequires: libogg-devel
 BuildRequires: liboggz-tools
+BuildRequires: doxygen
 
 %description
 Kate is an overlay codec, originally designed for karaoke and text,
