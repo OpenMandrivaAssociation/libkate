@@ -1,6 +1,6 @@
 %define name libkate
-%define version 0.3.8
-%define release %mkrel 2
+%define version 0.4.1
+%define release %mkrel 1
 %define major 1
 %define libname %mklibname kate %major
 %define develname %mklibname -d kate
