@@ -1,21 +1,21 @@
-%define major 1
-%define libname %mklibname kate %{major}
-%define develname %mklibname -d kate
-%define staticname %mklibname -s -d kate
+%define major	1
+%define libname	%mklibname kate %{major}
+%define liboggkate %mklibname kate %{major}
+%define devname	%mklibname -d kate
 
 Summary:	Karaoke and text codec for embedding in ogg
 Name:		libkate
 Version:	0.4.1
-Release:	2
-Source0:	http://libkate.googlecode.com/files/%{name}-%{version}.tar.gz
+Release:	3
 License:	BSD
 Group:		System/Libraries
 Url:		http://code.google.com/p/libkate/
-BuildRequires:	python-devel
+Source0:	http://libkate.googlecode.com/files/%{name}-%{version}.tar.gz
+BuildRequires:	doxygen
+BuildRequires:	liboggz-tools
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(ogg)
-BuildRequires:	liboggz-tools
-BuildRequires:	doxygen
+BuildRequires:	pkgconfig(python)
 
 %description
 Kate is an overlay codec, originally designed for karaoke and text,
@@ -35,55 +35,25 @@ Group:		System/Libraries
 Summary:	Karaoke and text codec for embedding in ogg
 
 %description -n %{libname}
-Kate is an overlay codec, originally designed for karaoke and text,
-that can be multiplixed in Ogg. Text and images can be carried by a
-Kate stream, and animated. Most of the time, this would be multiplexed
-with audio/video to carry subtitles, song lyrics (with or without
-karaoke data), etc, but doesn't have to be.
+This package includes a shared library for %{name}.
 
-Series of curves (splines, segments, etc) may be attached to various
-properties (text position, font size, etc) to create animated
-overlays. This allows scrolling or fading text to be defined. This can
-even be used to draw arbitrary shapes, so hand drawing can also be
-represented by a Kate stream.
+%package -n %{liboggkate}
+Group:		System/Libraries
+Summary:	Karaoke and text codec for embedding in ogg
 
-%package -n %{develname}
+%description -n %{liboggkate}
+This package includes a shared library for %{name}.
+
+%package -n %{devname}
 Group:		Development/C
 Summary:	Karaoke and text codec for embedding in ogg
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{liboggkate} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{_lib}kate-static-devel < 0.4.1-3
 
-%description -n %{develname}
-Kate is an overlay codec, originally designed for karaoke and text,
-that can be multiplixed in Ogg. Text and images can be carried by a
-Kate stream, and animated. Most of the time, this would be multiplexed
-with audio/video to carry subtitles, song lyrics (with or without
-karaoke data), etc, but doesn't have to be.
-
-Series of curves (splines, segments, etc) may be attached to various
-properties (text position, font size, etc) to create animated
-overlays. This allows scrolling or fading text to be defined. This can
-even be used to draw arbitrary shapes, so hand drawing can also be
-represented by a Kate stream.
-
-%package -n %{staticname}
-Group:		Development/C
-Summary:	Karaoke and text codec for embedding in ogg
-Requires:	%{develname} = %{version}-%{release}
-Provides:	%{name}-static-devel = %{version}-%{release}
-
-%description -n %{staticname}
-Kate is an overlay codec, originally designed for karaoke and text,
-that can be multiplixed in Ogg. Text and images can be carried by a
-Kate stream, and animated. Most of the time, this would be multiplexed
-with audio/video to carry subtitles, song lyrics (with or without
-karaoke data), etc, but doesn't have to be.
-
-Series of curves (splines, segments, etc) may be attached to various
-properties (text position, font size, etc) to create animated
-overlays. This allows scrolling or fading text to be defined. This can
-even be used to draw arbitrary shapes, so hand drawing can also be
-represented by a Kate stream.
+%description -n %{devname}
+This package includes the development files for %{name}.
 
 %package -n python-kdj
 Group:		Development/Python
@@ -93,17 +63,7 @@ Requires:	%{name}-tools = %{version}-%{release}
 Requires:	wxPythonGTK
 
 %description -n python-kdj
-Kate is an overlay codec, originally designed for karaoke and text,
-that can be multiplixed in Ogg. Text and images can be carried by a
-Kate stream, and animated. Most of the time, this would be multiplexed
-with audio/video to carry subtitles, song lyrics (with or without
-karaoke data), etc, but doesn't have to be.
-
-Series of curves (splines, segments, etc) may be attached to various
-properties (text position, font size, etc) to create animated
-overlays. This allows scrolling or fading text to be defined. This can
-even be used to draw arbitrary shapes, so hand drawing can also be
-represented by a Kate stream.
+This package includes the python binding for %{name
 
 %package tools
 Group:		Video
@@ -127,7 +87,8 @@ represented by a Kate stream.
 %setup -q
 
 %build
-%configure2_5x
+%configure2_5x \
+	--disable-static
 %make
 
 %install
@@ -137,6 +98,7 @@ mv %{buildroot}%{_datadir}/doc/%{name}/html installed-docs
 rm -rf %{buildroot}%{_datadir}/doc
 
 %files tools
+%doc README THANKS AUTHORS
 %{_bindir}/katalyzer
 %{_bindir}/katedec
 %{_bindir}/kateenc
@@ -145,11 +107,12 @@ rm -rf %{buildroot}%{_datadir}/doc
 %{_mandir}/man1/kateenc.1*
 
 %files -n %{libname}
-%doc README THANKS AUTHORS
 %{_libdir}/libkate.so.%{major}*
+
+%files -n %{liboggkate}
 %{_libdir}/liboggkate.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc ChangeLog installed-docs/*
 %{_libdir}/libkate.so
 %{_libdir}/liboggkate.so
@@ -157,30 +120,8 @@ rm -rf %{buildroot}%{_datadir}/doc
 %{_libdir}/pkgconfig/oggkate.pc
 %{_includedir}/kate
 
-%files -n %{staticname}
-%{_libdir}/libkate.a
-%{_libdir}/liboggkate.a
-
 %files -n python-kdj
 %{_bindir}/KateDJ
 %{py_puresitedir}/kdj
 %{_mandir}/man1/KateDJ.1*
-
-%changelog
-* Mon Aug 22 2011 Götz Waschk <waschk@mandriva.org> 0.4.1-1mdv2012.0
-+ Revision: 696072
-- new version
-
-* Sun Nov 21 2010 Funda Wang <fwang@mandriva.org> 0.3.8-2mdv2011.0
-+ Revision: 599410
-- rebuild for py2.7
-
-* Wed Aug 11 2010 Götz Waschk <waschk@mandriva.org> 0.3.8-1mdv2011.0
-+ Revision: 568928
-- update to new version 0.3.8
-
-* Wed Dec 23 2009 Götz Waschk <waschk@mandriva.org> 0.3.7-1mdv2010.1
-+ Revision: 481658
-- import libkate
-
 
