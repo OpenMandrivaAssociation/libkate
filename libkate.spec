@@ -1,6 +1,6 @@
 %define major	1
 %define libname	%mklibname kate %{major}
-%define liboggkate %mklibname kate %{major}
+%define liboggkate %mklibname oggkate %{major}
 %define devname	%mklibname -d kate
 
 Summary:	Karaoke and text codec for embedding in ogg
