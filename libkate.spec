@@ -63,7 +63,7 @@ Requires:	%{name}-tools = %{version}-%{release}
 Requires:	wxPythonGTK
 
 %description -n python-kdj
-This package includes the python binding for %{name
+This package includes the python binding for %{name}.
 
 %package tools
 Group:		Video
