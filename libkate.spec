@@ -3,6 +3,9 @@
 %define liboggkate %mklibname oggkate %{major}
 %define devname	%mklibname -d kate
 
+%define _disable_rebuild_configure 1
+%define _disable_lto 1
+
 Summary:	Karaoke and text codec for embedding in ogg
 Name:		libkate
 Version:	0.4.1
