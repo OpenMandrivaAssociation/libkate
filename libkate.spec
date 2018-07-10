@@ -9,7 +9,7 @@
 Summary:	Karaoke and text codec for embedding in ogg
 Name:		libkate
 Version:	0.4.1
-Release:	14
+Release:	15
 License:	BSD
 Group:		System/Libraries
 Url:		http://code.google.com/p/libkate/
