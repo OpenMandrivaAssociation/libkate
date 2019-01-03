@@ -87,15 +87,18 @@ even be used to draw arbitrary shapes, so hand drawing can also be
 represented by a Kate stream.
 
 %prep
-%setup -q
+%autosetup -p1
+
+# fix build on aarch
+cp -af %{_usr}/lib/rpm/config.{guess,sub} misc/autotools/
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 mkdir -p installed-docs
 mv %{buildroot}%{_datadir}/doc/%{name}/html installed-docs
 rm -rf %{buildroot}%{_datadir}/doc
