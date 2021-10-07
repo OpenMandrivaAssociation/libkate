@@ -89,9 +89,6 @@ represented by a Kate stream.
 %prep
 %autosetup -p1
 
-# fix build on aarch
-cp -af %{_usr}/lib/rpm/config.{guess,sub} misc/autotools/
-
 %build
 %configure \
 	--disable-static
@@ -108,9 +105,9 @@ rm -rf %{buildroot}%{_datadir}/doc
 %{_bindir}/katalyzer
 %{_bindir}/katedec
 %{_bindir}/kateenc
-%{_mandir}/man1/katalyzer.1*
-%{_mandir}/man1/katedec.1*
-%{_mandir}/man1/kateenc.1*
+%doc %{_mandir}/man1/katalyzer.1*
+%doc %{_mandir}/man1/katedec.1*
+%doc %{_mandir}/man1/kateenc.1*
 
 %files -n %{libname}
 %{_libdir}/libkate.so.%{major}*
@@ -129,5 +126,5 @@ rm -rf %{buildroot}%{_datadir}/doc
 %files -n python-kdj
 %{_bindir}/KateDJ
 %{py_puresitedir}/kdj
-%{_mandir}/man1/KateDJ.1*
+%doc %{_mandir}/man1/KateDJ.1*
 
