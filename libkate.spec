@@ -9,7 +9,7 @@
 Summary:	Karaoke and text codec for embedding in ogg
 Name:		libkate
 Version:	0.4.1
-Release:	17
+Release:	18
 License:	BSD
 Group:		System/Libraries
 Url:		http://code.google.com/p/libkate/
@@ -92,6 +92,7 @@ represented by a Kate stream.
 %build
 %configure \
 	--disable-static
+
 %make_build
 
 %install
