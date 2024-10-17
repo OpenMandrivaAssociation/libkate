@@ -12,7 +12,7 @@ Version:	0.4.1
 Release:	19
 License:	BSD
 Group:		System/Libraries
-Url:		http://code.google.com/p/libkate/
+Url:		https://code.google.com/p/libkate/
 Source0:	http://libkate.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	liboggz-tools
