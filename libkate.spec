@@ -14,6 +14,11 @@ License:	BSD
 Group:		System/Libraries
 Url:		https://code.google.com/p/libkate/
 Source0:	http://libkate.googlecode.com/files/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	liboggz-tools
 BuildRequires:	pkgconfig(libpng)
