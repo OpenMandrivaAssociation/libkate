@@ -8,12 +8,12 @@
 
 Summary:	Karaoke and text codec for embedding in ogg
 Name:		libkate
-Version:	0.4.1
-Release:	20
+Version:	0.4.3
+Release:	1
 License:	BSD
 Group:		System/Libraries
-Url:		https://code.google.com/p/libkate/
-Source0:	http://libkate.googlecode.com/files/%{name}-%{version}.tar.gz
+URL:            https://gitlab.xiph.org/xiph/kate
+Source0:        https://downloads.xiph.org/releases/kate/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
@@ -24,6 +24,7 @@ BuildRequires:	liboggz-tools
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(python)
+BuildRequires:	python-wxpython
 
 %description
 Kate is an overlay codec, originally designed for karaoke and text,
@@ -131,6 +132,6 @@ rm -rf %{buildroot}%{_datadir}/doc
 
 %files -n python-kdj
 %{_bindir}/KateDJ
-%{py_puresitedir}/kdj
+%{py_puresitedir}/kdj*
 %doc %{_mandir}/man1/KateDJ.1*
 
