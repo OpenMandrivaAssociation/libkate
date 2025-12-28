@@ -24,7 +24,7 @@ BuildRequires:	liboggz-tools
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(python)
-BuildRequires:	wxgtk-devel
+BuildRequires:	python-wxpython
 
 %description
 Kate is an overlay codec, originally designed for karaoke and text,
