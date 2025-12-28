@@ -131,7 +131,7 @@ rm -rf %{buildroot}%{_datadir}/doc
 %{_includedir}/kate
 
 %files -n python-kdj
-#{_bindir}/KateDJ
-#{py_puresitedir}/kdj
-#doc %{_mandir}/man1/KateDJ.1*
+%{_bindir}/KateDJ
+%{py_puresitedir}/kdj*
+%doc %{_mandir}/man1/KateDJ.1*
 
